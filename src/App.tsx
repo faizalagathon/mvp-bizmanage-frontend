@@ -1,4 +1,4 @@
-import { NavLink, BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { NavLink, BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom'
 import { Home, FilePlus2, History, Users, ListChecks, Settings, Plus, FileText, FileSpreadsheet, HandCoins, FileSignature, UserPlus2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -83,9 +83,9 @@ function MetricCard({ title, value, sub }: { title: string; value: string; sub?:
   )
 }
 
-function QuickAction({ color, title, desc, icon }: { color: string; title: string; desc: string; icon: React.ReactNode }) {
+function QuickAction({ color, title, desc, icon, to }: { color: string; title: string; desc: string; icon: React.ReactNode; to: string }) {
   return (
-    <div className="flex items-center gap-4 rounded-md border p-4 hover:bg-gray-50 cursor-pointer">
+    <Link to={to} className="flex items-center gap-4 rounded-md border p-4 hover:bg-gray-50 cursor-pointer">
       <div className={`h-10 w-10 rounded-md grid place-content-center text-white ${color}`}>
         {icon}
       </div>
@@ -93,7 +93,7 @@ function QuickAction({ color, title, desc, icon }: { color: string; title: strin
         <div className="font-medium leading-none">{title}</div>
         <div className="text-sm text-gray-500 truncate">{desc}</div>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -120,10 +120,10 @@ function DashboardPage() {
           <SectionHeader title="Aksi Cepat" />
         </CardHeader>
         <CardContent className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-          <QuickAction color="bg-blue-600" title="Invoice" desc="Buat tagihan untuk klien" icon={<FileText size={18} />} />
-          <QuickAction color="bg-purple-600" title="BAST" desc="Berita acara serah terima" icon={<FileSpreadsheet size={18} />} />
-          <QuickAction color="bg-green-600" title="Penawaran" desc="Buat proposal penawaran" icon={<FileSignature size={18} />} />
-          <QuickAction color="bg-orange-500" title="Kwitansi" desc="Tanda terima pembayaran" icon={<HandCoins size={18} />} />
+          <QuickAction to='/buat' color="bg-blue-600" title="Invoice" desc="Buat tagihan untuk klien" icon={<FileText size={18} />} />
+          <QuickAction to='/buat' color="bg-purple-600" title="BAST" desc="Berita acara serah terima" icon={<FileSpreadsheet size={18} />} />
+          <QuickAction to='/buat' color="bg-green-600" title="Penawaran" desc="Buat proposal penawaran" icon={<FileSignature size={18} />} />
+          <QuickAction to='/buat' color="bg-orange-500" title="Kwitansi" desc="Tanda terima pembayaran" icon={<HandCoins size={18} />} />
         </CardContent>
       </Card>
 
