@@ -6,7 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDocxError(err: unknown): string {
-  // @ts-expect-error - docxtemplater error shape
   const e = err as { message?: string; properties?: { errors?: { id?: string; explanation?: string; message?: string; properties?: { tag?: string } }[] } }
   const lines: string[] = []
   if (e?.properties?.errors && Array.isArray(e.properties.errors) && e.properties.errors.length > 0) {

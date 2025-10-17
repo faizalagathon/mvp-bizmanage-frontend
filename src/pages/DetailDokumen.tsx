@@ -17,12 +17,16 @@ export default function DetailDokumen() {
   if (!doc) return <div className="p-6">Dokumen tidak ditemukan.</div>
 
   function setItem<K extends keyof LineItem>(idx: number, key: K, val: LineItem[K]) {
-    const items = [...doc.items]
-    items[idx] = { ...items[idx], [key]: val }
-    setDoc({ ...doc, items })
+    setDoc(prev => {
+      if (!prev) return prev
+      const items = [...prev.items]
+      items[idx] = { ...items[idx], [key]: val }
+      return { ...prev, items }
+    })
   }
 
   function save() {
+    if (!doc) return
     const updated = docs.map(d => d.id === doc.id ? doc : d)
     storage.saveDocuments(updated)
     alert('Perubahan disimpan')
